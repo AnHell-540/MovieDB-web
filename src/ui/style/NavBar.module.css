@@ -7,6 +7,7 @@
     margin-bottom: 6em;
     position: fixed;
     top: 0;
+    z-index: 50;
 }
 
 .navbar {
@@ -56,6 +57,7 @@
     font-weight: bold;
     text-decoration: none;
     float: right;
+    transition: all 0.2s;
 }
 
 .active_navbar_link {
@@ -63,6 +65,8 @@
     font-weight: bold;
     text-decoration: none;
     float: right;
+    transition: all 0.15s;
+    transform: scale(1.07);
 }
 
 .navbar_link, .active_navbar_link{

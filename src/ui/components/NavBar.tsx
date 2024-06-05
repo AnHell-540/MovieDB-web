@@ -9,14 +9,14 @@ export const NavBar = () => {
       <nav className={style.navbar}>
         
         <div className={style.navbar_div_logo}>
-          <Link className={style.link_logo} to="/home">
+          <Link className={style.link_logo} to="/">
             <img className={style.logo} src={logo} alt="home navigation logo"  />
           </Link>
         </div>
 
         <ul className={style.navbar_links}>
           <li> 
-          <NavLink className={({ isActive }) => isActive ? style.active_navbar_link : style.navbar_link} to="/home">
+          <NavLink className={({ isActive }) => isActive ? style.active_navbar_link : style.navbar_link} to="/">
             Popular
           </NavLink>
           </li>
