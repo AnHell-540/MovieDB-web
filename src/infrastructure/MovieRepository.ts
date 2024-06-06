@@ -2,8 +2,7 @@ import { useState } from "react";
 import { MovieResponse } from "../domain/Movies.interface";
 
 export const MovieRepository = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [errorFetch, setErrorFetch] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
 
   const options = {
     method: "GET",
@@ -16,15 +15,13 @@ export const MovieRepository = () => {
 
   const fetchMovies = async (url: string): Promise<MovieResponse> => {
     try {
-      setLoading(true);
+      // setLoading(true);
       const data = await fetch(url, options);
       const response = await data.json();
-      setLoading(false);
-      setErrorFetch(false);
+      // setLoading(false);
       return response as MovieResponse;
     } catch (e) {
-      setLoading(false);
-      setErrorFetch(true);
+      // setLoading(false);
       console.error(e);
       throw new Error("Error fetch.");
     }
@@ -51,7 +48,6 @@ export const MovieRepository = () => {
     fetchTopRatedMovies,
     fetchNextReleases,
     fetchMovie,
-    loading,
-    errorFetch,
+    // loading,
   };
 };

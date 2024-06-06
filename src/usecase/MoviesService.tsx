@@ -21,7 +21,6 @@ export const MoviesService = (movieRepository: ReturnType<typeof MovieRepository
         getTopRatedMovies,
         getPopularMovies,
         getNextReleases,
-        loading: movieRepository.loading,
-        error: movieRepository.errorFetch
+        // loading: movieRepository.loading,
     }
 }
