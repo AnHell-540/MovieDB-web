@@ -11,9 +11,9 @@
 }
 
 .navbar {
-    width: 80%;
+    width: auto;
     height: 100%;
-    margin-inline: auto;
+    margin-inline: 7.5em;
     
     /* background-color: #304171; */
     display: flex;

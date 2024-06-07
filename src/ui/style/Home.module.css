@@ -1,6 +1,8 @@
 .container {
-width: 80%;
-margin: auto;
+/* width: 80%;
+margin: auto; */
+width: auto;
+margin-inline: 7.5em;
 margin-top: 10em;
 }
 
