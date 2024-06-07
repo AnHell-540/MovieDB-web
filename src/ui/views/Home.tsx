@@ -27,12 +27,12 @@ export const Home = () => {
         <p>{filteredMovies.length} items</p>
       </div>
 
-      <div className={style.movie_list_container}>
+      <div >
 
         {loading ? (
           <span className={style.loader} data-testid='loader'></span>
         ) : (
-          <div role="list">
+          <div role="list" className={style.movie_list_container}>
             {filteredMovies.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
