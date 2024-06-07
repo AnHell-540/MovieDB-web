@@ -14,9 +14,11 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
     <div
       className={style.card}
       onClick={() => navigate(`/movie?id=${movie.id}`)}
+      data-testid='movie-card'
     >
       <div className={style.img_rating_container}>
-        <div className={style.rating}>
+        {movie.vote_average > 0 &&
+          <div className={style.rating}>
           <svg
             width={18}
             height={18}
@@ -26,8 +28,8 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
           >
             <path d={svgPath} />
           </svg>
-          <p className={style.rating_value}>{movie.vote_average.toFixed(1)}</p>
-        </div>
+          <p className={style.rating_value} role="rating">{movie.vote_average.toFixed(1)}</p>
+        </div>}
 
         <div className={style.image_container}>
           <img
