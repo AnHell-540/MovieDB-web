@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { MovieResponse } from "../domain/Movies.interface";
 
 export const MovieRepository = () => {
-  // const [loading, setLoading] = useState<boolean>(false);
 
   const options = {
     method: "GET",
@@ -15,39 +13,32 @@ export const MovieRepository = () => {
 
   const fetchMovies = async (url: string): Promise<MovieResponse> => {
     try {
-      // setLoading(true);
       const data = await fetch(url, options);
       const response = await data.json();
-      // setLoading(false);
       return response as MovieResponse;
     } catch (e) {
-      // setLoading(false);
       console.error(e);
       throw new Error("Error fetch.");
     }
   };
 
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
   const fetchPopularMovies = (): Promise<MovieResponse> => {
-    return fetchMovies("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1");
+    return fetchMovies(`${baseUrl}popular?language=en-US&page=1`);
   };
 
   const fetchTopRatedMovies = (): Promise<MovieResponse> => {
-    return fetchMovies("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1");
+    return fetchMovies(`${baseUrl}top_rated?language=en-US&page=1`);
   };
 
   const fetchNextReleases = (): Promise<MovieResponse> => {
-    return fetchMovies("https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1");
-  };
-
-  const fetchMovie = (id: number): Promise<MovieResponse> => {
-    return fetchMovies(`https://api.themoviedb.org/3/movie/${id}?language=en-US`);
+    return fetchMovies(`${baseUrl}upcoming?language=en-US&page=1`);
   };
 
   return {
     fetchPopularMovies,
     fetchTopRatedMovies,
     fetchNextReleases,
-    fetchMovie,
-    // loading,
   };
 };

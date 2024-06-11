@@ -5,7 +5,7 @@ import {
   NextReleases,
   Favorites,
   TopRated,
-} from "../ui/views/index";
+} from "../views/index";
 
 
 export const AppRouter = () => {

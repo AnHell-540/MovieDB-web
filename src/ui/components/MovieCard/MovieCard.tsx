@@ -1,20 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { MovieResult } from "../../domain/Movies.interface";
-import style from "../style/MovieCard.module.css";
+import { MovieResult } from "../../../core/domain/Movies.interface";
+import style from './MovieCard.module.css'
 
 interface MovieCardProps {
   movie: MovieResult;
 }
 
 export const MovieCard = ({ movie }: MovieCardProps) => {
-  const imgUrl = "https://image.tmdb.org/t/p/w342";
+  const imgBaseUrl = process.env.REACT_APP_CARD_IMAGE
   const navigate = useNavigate();
 
   return (
     <div
       className={style.card}
       onClick={() => navigate(`/movie?id=${movie.id}`)}
-      data-testid='movie-card'
+      role='movie-card'
     >
       <div className={style.img_rating_container}>
         {movie.vote_average > 0 &&
@@ -34,7 +34,7 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
         <div className={style.image_container}>
           <img
             className={style.card_image}
-            src={imgUrl + movie.poster_path}
+            src={imgBaseUrl + movie.poster_path}
             alt={movie.title}
           />
         </div>

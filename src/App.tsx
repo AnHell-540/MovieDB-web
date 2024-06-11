@@ -1,6 +1,6 @@
 
 import './App.css';
-import { AppRouter } from './router/AppRouter';
+import { AppRouter } from './ui/router/AppRouter';
 
 function App() {
 

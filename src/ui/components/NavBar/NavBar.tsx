@@ -1,6 +1,6 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import style from "../style/NavBar.module.css";
-import logo from "../../assets/images/logo-navbar.png";
+import { Link, NavLink } from "react-router-dom";
+import style from './NavBar.module.css'
+import logo from '../../../assets/images/logo-navbar.png'
 
 export const NavBar = () => {
 

@@ -1,5 +1,5 @@
 import { MovieResponse } from "../domain/Movies.interface"
-import { MovieRepository } from "../infrastructure/MovieRepository"
+import { MovieRepository } from "../infrastructure"
 
 export const MoviesService = (movieRepository: ReturnType<typeof MovieRepository>) => {
 
@@ -12,15 +12,10 @@ export const MoviesService = (movieRepository: ReturnType<typeof MovieRepository
     const getNextReleases = async(): Promise<MovieResponse> => {
         return await movieRepository.fetchNextReleases()
     }
-    const getMovie = async(id:number): Promise<MovieResponse> => {
-        return await movieRepository.fetchMovie(id)
-    }
 
     return {
-        getMovie,
         getTopRatedMovies,
         getPopularMovies,
         getNextReleases,
-        // loading: movieRepository.loading,
     }
 }

@@ -1,12 +1,12 @@
 import { useState, ChangeEvent } from "react";
-import { MovieResult } from "../../domain/Movies.interface";
+import { MovieResult } from "../../core/domain/Movies.interface";
 
-export function useFilterMoviesByName(initialMovies: MovieResult[]) {
+export const useFilterMoviesByName = (initialMovies: MovieResult[]) => {
   const [filter, setFilter] = useState<string>("");
 
-  function filterMovies({
+  const filterMovies = ({
     target: { value },
-  }: ChangeEvent<HTMLInputElement>): void {
+  }: ChangeEvent<HTMLInputElement>): void => {
     setFilter(value);
   }
 
