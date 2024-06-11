@@ -1,9 +1,8 @@
 import { rest } from "msw";
 
 export const mockPopularMoviesHandler = [
-  // URL desde .env?
   rest.get(
-    "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+    `${process.env.REACT_APP_POPULAR_MOVIES}`,
     (req, res, ctx) => {
       return res(
         ctx.status(200),
@@ -359,7 +358,7 @@ export const mockPopularMoviesHandler = [
     }
   ),
   rest.get(
-    "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+    `${process.env.REACT_APP_UPCOMING_MOVIES}`,
     (req, res, ctx) => {
       return res(
         ctx.status(200),
@@ -777,7 +776,7 @@ export const mockPopularMoviesHandler = [
   ),
 
   rest.get(
-    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+    `${process.env.REACT_APP_TOPRATED_MOVIES}`,
     (req, res, ctx) => {
       return res(
         ctx.status(200),

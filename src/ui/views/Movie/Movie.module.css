@@ -1,0 +1,23 @@
+.container {
+  margin: auto;
+  width: 75em;
+  /* margin-inline: 7.5em; */
+  margin-top: 10em;
+  /* background-color: brown; */
+  
+}
+
+.front_image_container {
+  width: 100%;
+  height: 30em;
+  background-color: brown;
+  border-radius: 40px;
+  overflow: hidden;
+
+}
+
+.front_image{
+  width: 100%;
+  object-fit:contain;
+  /* box-shadow: inset 0 0 0 1000px rgba(0,0,0,.6); */
+}
