@@ -25,7 +25,7 @@ describe("Home component", () => {
   test("render cards in movie_list_container", async () => {
     render(<Home />);
 
-    const movieCards = await screen.findAllByText(/Movie/i);
+    const movieCards = await screen.findAllByText(/Apes/i);
     expect(movieCards.length).toBeGreaterThan(0);
   });
 
@@ -34,14 +34,14 @@ describe("Home component", () => {
 
     const loader = await screen.findByTestId("loader");
     await waitForElementToBeRemoved(loader);
-    let movieCards = await screen.findAllByText(/film/i);
-    expect(movieCards.length).toBe(2);
+    let movieCards = await screen.findAllByText(/apes/i);
+    expect(movieCards.length).toBe(1);
 
     const searchInput = screen.getByPlaceholderText("Search Movies");
-    fireEvent.change(searchInput, { target: { value: "1" } });
-    movieCards = await screen.findAllByText(/film/i);
+    fireEvent.change(searchInput, { target: { value: "civil" } });
+    movieCards = await screen.findAllByText(/civil/i);
     expect(movieCards.length).toBe(1);
-    expect(screen.getByText(/film 1/i)).toBeInTheDocument();
+    expect(screen.getByText(/civil/i)).toBeInTheDocument();
   });
 
   test("renders loader before MovieCards", async () => {
@@ -49,7 +49,7 @@ describe("Home component", () => {
 
     const loader = await screen.findByTestId("loader");
     await waitForElementToBeRemoved(loader);
-    const movieCards = await screen.findAllByText(/Film/i);
-    expect(movieCards.length).toBeGreaterThan(0);
+    const movieCards = await screen.findAllByText(/Ape/i);
+    expect(movieCards.length).toBe(1);
   });
 });
