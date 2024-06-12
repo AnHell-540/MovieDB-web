@@ -1,16 +1,18 @@
 import { MovieResult } from "../../core/domain/Movies.interface";
 import style from "./MovieCard/MovieCard.module.css";
 
-interface MovieCardProps {
+interface MovieRatingProps {
   movie: MovieResult;
+  width?: number,
+  height?: number
 }
 
-export const MovieRating = ({movie}: MovieCardProps) => {
+export const MovieRating = ({movie, width = 18, height = 18}: MovieRatingProps) => {
   return (
     <div className={style.rating}>
       <svg
-        width={18}
-        height={18}
+        width={width}
+        height={height}
         fill="#FFAD49"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 576 512"

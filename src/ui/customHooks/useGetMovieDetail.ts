@@ -3,13 +3,18 @@ import { MovieResult } from "../../core/domain/Movies.interface";
 
 export const useGetMovieDetail = (fetchFunction: () => Promise<MovieResult>) => {
   
-  const emptyMovie = {
+  const emptyMovie: MovieResult = {
     backdrop_path: "",
+    genres:[{
+      name: ""
+    }],
     id: "",
     overview: "",
     popularity: 0,
     poster_path: "",
     release_date: "",
+    runtime:"",
+    tagline: "",
     title: "",
     vote_average: 0,
   };
