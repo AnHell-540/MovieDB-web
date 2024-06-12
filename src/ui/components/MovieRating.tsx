@@ -1,15 +1,16 @@
 import { MovieResult } from "../../core/domain/Movies.interface";
-import style from "./MovieCard/MovieCard.module.css";
 
 interface MovieRatingProps {
-  movie: MovieResult;
+  movie: MovieResult,
   width?: number,
-  height?: number
+  height?: number,
+  classContainer: string,
+  classValue: string
 }
 
-export const MovieRating = ({movie, width = 18, height = 18}: MovieRatingProps) => {
+export const MovieRating = ({movie, width = 18, height = 18, classContainer, classValue}: MovieRatingProps) => {
   return (
-    <div className={style.rating}>
+    <div className={classContainer}>
       <svg
         width={width}
         height={height}
@@ -19,7 +20,7 @@ export const MovieRating = ({movie, width = 18, height = 18}: MovieRatingProps) 
       >
         <path d={svgPath} />
       </svg>
-      <p className={style.rating_value} role="rating">
+      <p className={classValue} role="rating">
         {movie.vote_average.toFixed(1)}
       </p>
     </div>

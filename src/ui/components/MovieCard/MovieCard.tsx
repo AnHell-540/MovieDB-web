@@ -19,7 +19,7 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
     >
       <div className={style.img_rating_container}>
         {movie.vote_average > 0 && (
-          <MovieRating movie={movie}/>
+          <MovieRating movie={movie} classContainer={style.rating} classValue={style.rating_value}/>
         )}
 
         <div className={style.image_container}>

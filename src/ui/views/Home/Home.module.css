@@ -1,6 +1,4 @@
 .container {
-/* width: 80%;
-margin: auto; */
 width: auto;
 margin-inline: 7.5em;
 margin-top: 10em;
@@ -30,7 +28,6 @@ margin-top: 10em;
   border: 1px solid #667295;
   box-shadow: 0px 0px 12px 3px #263357;
 }
-
 
 .title {
   margin: 0;
