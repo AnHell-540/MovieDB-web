@@ -1,7 +1,7 @@
 // src/mocks/server.ts
 import { setupServer } from 'msw/node';
-import { mockPopularMoviesHandler } from '../../mocks/mockPopuarMovies';
+import { mockMovies } from './mockMovies';
 
-const server = setupServer(...mockPopularMoviesHandler);
+const server = setupServer(...mockMovies);
 
 export { server };

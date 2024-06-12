@@ -1,3 +1,3 @@
 import { setupWorker } from 'msw';
-import { mockPopularMoviesHandler } from './mockPopuarMovies';
-export const server = setupWorker(...mockPopularMoviesHandler);
+import { mockMovies } from '../tests/mocks/mockMovies';
+export const server = setupWorker(...mockMovies);
