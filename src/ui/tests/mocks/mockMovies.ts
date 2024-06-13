@@ -1066,7 +1066,7 @@ export const mockMovies = [
     );
   }),
   rest.get(
-    `https://api.themoviedb.org/3/movie/?id=?language=en-US`,
+    `https://api.themoviedb.org/3/movie/:id`,
     (req, res, ctx) => {
       return res(
         ctx.status(200),
