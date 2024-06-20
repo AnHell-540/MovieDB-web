@@ -4,11 +4,12 @@ import { useGetMovieDetail } from "../../customHooks/useGetMovieDetail";
 import { MovieDetailRepository } from "../../../core/infrastructure";
 import { MovieDetailService } from "../../../core/usecase/MovieDetailService";
 import { MovieRating } from "../../components/MovieRating";
-
-const movieDetailRepository = MovieDetailRepository();
-const movieDetailService = MovieDetailService(movieDetailRepository);
+import { CinemaMap } from "../../components/CinemasMap/CinemaMap";
 
 export const Movie = () => {
+  const movieDetailRepository = MovieDetailRepository();
+  const movieDetailService = MovieDetailService(movieDetailRepository);
+
   const imgUrl = "https://image.tmdb.org/t/p/w1280";
   const [params] = useSearchParams();
   const movieId = params.get("id") ?? "";
@@ -19,6 +20,7 @@ export const Movie = () => {
   const genreString = movie.genres.map((g) => g.name).join(", ");
 
   return (
+    <>
     <div className={style.container}>
       <div className={style.header}>
         <div className={style.header_img_container}>
@@ -63,9 +65,12 @@ export const Movie = () => {
             <p className={style.info_section_title}>Genres</p>
             <p className={style.info_section_content}>{genreString}</p>
           </div>
-          
         </section>
       </main>
     </div>
+      <section>
+        <CinemaMap/> 
+      </section>
+    </>
   );
 };
