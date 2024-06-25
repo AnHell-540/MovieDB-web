@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useLoadScript,
   GoogleMap,
@@ -9,26 +9,27 @@ import { useGetNearbyCinemas } from "../../customHooks/useGetNearbyCinemas";
 import { Location, Cinema } from "../../../core/domain/Cinema.interface";
 
 const libraries: "places"[] = ["places"];
-
 const mapContainerStyle = {
   width: "100%",
-  height: "70vh",
+  height: "60vh",
 };
-
 const options = {
   disableDefaultUI: true,
   zoomControl: true,
 };
 
 export const CinemaMap = () => {
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_API_GOOGLE!,
     libraries,
   });
 
-  const [userLocation, setUserLocation] = useState<Location | null>(null);
-  const [selectedCinema, setSelectedCinema] = useState<Cinema | null>(null);
-
+  const emptyLocation: Location = {
+    lat:0,
+    lng:0
+  }
+  const [userLocation, setUserLocation] = useState<Location>( emptyLocation );
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -42,6 +43,19 @@ export const CinemaMap = () => {
   }, []);
 
   const { cinemas, loading } = useGetNearbyCinemas(userLocation);
+  const [selectedCinema, setSelectedCinema] = useState<Cinema | null>(null);
+
+  // useEffect(() => {
+  //   if (cinemas.length > 0) {
+  //     setSelectedCinema(cinemas[0]);
+  //   }
+  // }, [cinemas]);
+
+  const getHrefFromCinemaPhotosAtt = (att: string) => {
+    const parts = att.split('"');
+    const href = parts[1];
+    return href;
+  };
 
   if (loadError) return <div>Error loading maps</div>;
   if (!isLoaded) return <div>Loading Maps</div>;
@@ -49,9 +63,12 @@ export const CinemaMap = () => {
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
-      zoom={14}
+      zoom={13}
       center={userLocation ?? { lat: 0, lng: 0 }}
-      options={options}
+      options={{
+        ...options,
+        mapId: process.env.REACT_APP_MAP_ID_STYLE,
+      }}
     >
       {loading ? (
         <div>Loading cinemas...</div>
@@ -64,7 +81,7 @@ export const CinemaMap = () => {
               lng: cinema.geometry.location.lng,
             }}
             onClick={() => setSelectedCinema(cinema)}
-          />
+          ></Marker>
         ))
       )}
 
@@ -77,7 +94,28 @@ export const CinemaMap = () => {
           onCloseClick={() => setSelectedCinema(null)}
         >
           <div>
-            <h2>{selectedCinema.name}</h2>
+            <h2 style={{ color: "#777777" }}>{selectedCinema.name}</h2>
+            {selectedCinema.photos && selectedCinema.photos.length > 0 && (
+              <div>
+                {selectedCinema.photos.map((photo, index) => (
+                  <div key={index}>
+                    {photo.html_attributions && (
+                      <h4>
+                        <a
+                          href={getHrefFromCinemaPhotosAtt(
+                            photo.html_attributions[0]
+                          )}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Página del sitio
+                        </a>
+                      </h4>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
             <p>{selectedCinema.vicinity}</p>
           </div>
         </InfoWindow>

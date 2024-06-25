@@ -4,6 +4,10 @@ export interface Location {
   lng: number;
 }
 
+export interface Photo {
+  html_attributions: string[];
+}
+
 export interface Cinema {
   place_id: string;
   name: string;
@@ -11,5 +15,5 @@ export interface Cinema {
   geometry: {
     location: Location;
   };
-
+  photos?: Photo[]
 }

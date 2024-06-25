@@ -108,23 +108,24 @@
   color: #C3C8D4;
 }
 
-
-
-/* .rating {
-  width: 3.75em;
-  height: 2.5em;
-  background-color: #000000d8;
-  z-index: 5;
-  position: absolute;
-  margin-top: 10px;
-  margin-left: 8px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.map_container{
+  margin-bottom: 10vh;
 }
 
-.rating_value {
-  margin-left: 4px;
-  color: #FFAD49;
-} */
+h2 {
+  font-size: 1.4rem;
+}
+
+h4{
+  a {
+    color: #263357;
+    text-decoration: none;
+    animation: line 0.5s ease-in-out;
+  }
+  
+  a:hover{
+    text-decoration: underline;
+    color: #435a9a;
+  }
+
+}

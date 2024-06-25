@@ -68,7 +68,7 @@ export const Movie = () => {
         </section>
       </main>
     </div>
-      <section>
+      <section className={style.map_container}>
         <CinemaMap/> 
       </section>
     </>

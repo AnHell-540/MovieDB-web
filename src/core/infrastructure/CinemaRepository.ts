@@ -32,6 +32,11 @@ export const CinemaRepository = {
                       lng: place.geometry.location.lng(),
                     },
                   },
+                photos: [
+                  {
+                    html_attributions: place.photos?.[0].html_attributions
+                  }
+                ]
                 };
               } else {
                 return null;
