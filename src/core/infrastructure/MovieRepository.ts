@@ -1,4 +1,4 @@
-import { MovieResponse } from "../domain/Movies.interface";
+import { MovieResponse } from "../domain";
 
 export const MovieRepository = () => {
 

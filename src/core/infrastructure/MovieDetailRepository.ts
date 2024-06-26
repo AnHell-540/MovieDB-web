@@ -5,17 +5,14 @@ export const MovieDetailRepository = () => {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+      Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
     },
   };
   const baseUrl = process.env.REACT_APP_BASE_URL;
-  const fetchMovieDetail = async (id:string): Promise<MovieResult> => {
+  
+  const fetchMovieDetail = async (id: string): Promise<MovieResult> => {
     try {
-      const data = await fetch(
-        `${baseUrl}${id}?language=en-US`,
-        options
-      );
+      const data = await fetch(`${baseUrl}${id}?language=en-US`, options);
       const response: MovieResult = await data.json();
       return response;
     } catch (e) {

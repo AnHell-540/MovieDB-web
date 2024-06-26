@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { MovieResult } from "../../../core/domain/Movies.interface";
+import { MovieResult } from "../../../core/domain";
 import style from "./MovieCard.module.css";
 import { MovieRating } from "../MovieRating";
 

@@ -1,4 +1,4 @@
-import { MovieResult } from "../../core/domain/Movies.interface";
+import { MovieResult } from "../../core/domain"
 
 interface MovieRatingProps {
   movie: MovieResult,

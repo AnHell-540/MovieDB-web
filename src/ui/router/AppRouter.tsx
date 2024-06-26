@@ -1,12 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import {
-  Home,
-  Movie,
-  NextReleases,
-  Favorites,
-  TopRated,
-} from "../views/index";
-
+import { Home, Movie, NextReleases, Favorites, TopRated } from "../views/index";
 
 export const AppRouter = () => {
   return (

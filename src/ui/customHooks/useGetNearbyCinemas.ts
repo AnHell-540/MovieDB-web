@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { CinemaService } from "../../core/usecase/CinemaService";
-import { Cinema, Location } from "../../core/domain/Cinema.interface";
+import { CinemaService } from "../../core/usecase";
+import { Cinema, Location } from "../../core/domain";
 
 export const useGetNearbyCinemas = (location: Location | null) => {
   const [cinemas, setCinemas] = useState<Cinema[]>([]);

@@ -1,4 +1,4 @@
-import { MovieResponse, MovieResult } from "../../core/domain/Movies.interface";
+import { MovieResponse, MovieResult } from "../../core/domain";
 import { useEffect, useState } from "react";
 
 export const useGetMovies = (fetchFunction: () => Promise<MovieResponse>) => {

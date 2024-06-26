@@ -15,7 +15,7 @@ export const CinemaRepository = {
         location: new google.maps.LatLng(location.lat, location.lng),
         radius: 30000,
         type: "movie_theater",
-      }; 
+      };
 
       service.nearbySearch(request, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK && results) {
@@ -32,11 +32,11 @@ export const CinemaRepository = {
                       lng: place.geometry.location.lng(),
                     },
                   },
-                photos: [
-                  {
-                    html_attributions: place.photos?.[0].html_attributions
-                  }
-                ]
+                  photos: [
+                    {
+                      html_attributions: place.photos?.[0].html_attributions,
+                    },
+                  ],
                 };
               } else {
                 return null;

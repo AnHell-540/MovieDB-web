@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import { MovieResult } from "../../core/domain/Movies.interface";
+import { MovieResult } from "../../core/domain";
 
 export const useFilterMoviesByName = (initialMovies: MovieResult[]) => {
   const [filter, setFilter] = useState<string>("");

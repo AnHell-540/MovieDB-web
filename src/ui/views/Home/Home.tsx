@@ -1,8 +1,8 @@
 import style from "./Home.module.css";
-import { MovieCard } from "../../components/MovieCard/MovieCard";
+import { MovieCard } from "../../components";
 import { useFilterMoviesByName, useGetMovies } from "../../customHooks";
-import { MovieRepository } from "../../../core/infrastructure/MovieRepository";
-import { MoviesService } from "../../../core/usecase/MoviesService";
+import { MovieRepository } from "../../../core/infrastructure";
+import { MoviesService } from "../../../core/usecase";
 
 const movieRepository = MovieRepository();
 const moviesService = MoviesService(movieRepository);
@@ -13,7 +13,6 @@ export const Home = () => {
 
   return (
     <div className={style.container}>
-
       <section>
         <h1 className={`${style.title} ${style.poppins_bold}`} role="title">
           Popular movies
@@ -33,7 +32,7 @@ export const Home = () => {
         <div className={style.movie_count}>
           <p>{filteredMovies.length} items</p>
         </div>
-        
+
         {loading ? (
           <span className={style.loader} data-testid="loader"></span>
         ) : (
@@ -44,7 +43,6 @@ export const Home = () => {
           </div>
         )}
       </main>
-      
     </div>
   );
 };

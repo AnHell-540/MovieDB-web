@@ -1,15 +1,47 @@
 import { Movie } from "../views";
-import { screen, render } from "@testing-library/react";
+import { screen, render, waitForElementToBeRemoved } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { server } from "./mocks/server";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+beforeAll(() => {
+  server.listen();
+
+  const mockGeolocation = {
+    getCurrentPosition: jest.fn().mockImplementation((success, error) => {
+      success({
+        coords: {
+          latitude: 37.7749,
+          longitude: -122.4194,
+          accuracy: 100,
+          altitude: null,
+          altitudeAccuracy: null,
+          heading: null,
+          speed: null,
+        },
+        timestamp: Date.now(),
+      });
+    }),
+    watchPosition: jest.fn(),
+  };
+
+  Object.defineProperty(global.navigator, 'geolocation', {
+    value: mockGeolocation,
+    configurable: true,
+  });
+});
+
+afterEach(() => {
+  server.resetHandlers();
+  jest.clearAllMocks();
+});
+
+afterAll(() => {
+  server.close();
+});
 
 describe("Movie component", () => {
-  
+
   test("render all the info", async () => {
     const movieId = "929590";
     render(
@@ -19,6 +51,8 @@ describe("Movie component", () => {
         </Routes>
       </MemoryRouter>
     );
+
+    screen.debug()
 
     const title = await screen.findByText(/Civil War/);
     const tagline = await screen.findByText(/Welcome to the frontline/i);
@@ -39,5 +73,10 @@ describe("Movie component", () => {
     expect(genres).toBeInTheDocument();
     expect(headerPoster).toBeInTheDocument();
     expect(poster).toBeInTheDocument();
+    
+    // const mapLoader = await screen.findByText(/Loading Maps/i)
+    // expect(mapLoader).toBeInTheDocument();
+    // await waitForElementToBeRemoved(mapLoader, {timeout:1000})
+
   });
 });

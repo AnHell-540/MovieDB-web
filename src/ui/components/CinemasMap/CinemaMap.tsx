@@ -5,8 +5,8 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import { useGetNearbyCinemas } from "../../customHooks/useGetNearbyCinemas";
-import { Location, Cinema } from "../../../core/domain/Cinema.interface";
+import { useGetNearbyCinemas } from "../../customHooks";
+import { Cinema, Location } from "../../../core/domain";
 
 const libraries: "places"[] = ["places"];
 const mapContainerStyle = {
@@ -19,17 +19,16 @@ const options = {
 };
 
 export const CinemaMap = () => {
-
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_API_GOOGLE!,
     libraries,
   });
 
   const emptyLocation: Location = {
-    lat:0,
-    lng:0
-  }
-  const [userLocation, setUserLocation] = useState<Location>( emptyLocation );
+    lat: 0,
+    lng: 0,
+  };
+  const [userLocation, setUserLocation] = useState<Location>(emptyLocation);
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -44,12 +43,6 @@ export const CinemaMap = () => {
 
   const { cinemas, loading } = useGetNearbyCinemas(userLocation);
   const [selectedCinema, setSelectedCinema] = useState<Cinema | null>(null);
-
-  // useEffect(() => {
-  //   if (cinemas.length > 0) {
-  //     setSelectedCinema(cinemas[0]);
-  //   }
-  // }, [cinemas]);
 
   const getHrefFromCinemaPhotosAtt = (att: string) => {
     const parts = att.split('"');
@@ -106,7 +99,6 @@ export const CinemaMap = () => {
                             photo.html_attributions[0]
                           )}
                           target="_blank"
-                          rel="noopener noreferrer"
                         >
                           Página del sitio
                         </a>

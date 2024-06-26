@@ -1,4 +1,3 @@
-
 export interface Location {
   lat: number;
   lng: number;
@@ -15,5 +14,5 @@ export interface Cinema {
   geometry: {
     location: Location;
   };
-  photos?: Photo[]
+  photos?: Photo[];
 }

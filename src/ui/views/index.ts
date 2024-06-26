@@ -1,5 +1,5 @@
 export * from './Home/Home'
 export * from './Favorites/Favorites'
-export * from './Movie/Movie'
+export * from './MovieDetail/Movie'
 export * from './NextReleases/NextReleases'
 export * from './TopRated/TopRated'

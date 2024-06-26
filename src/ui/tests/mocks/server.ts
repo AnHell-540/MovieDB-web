@@ -1,4 +1,3 @@
-// src/mocks/server.ts
 import { setupServer } from 'msw/node';
 import { mockMovies } from './mockMovies';
 

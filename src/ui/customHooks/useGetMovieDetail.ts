@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MovieResult } from "../../core/domain/Movies.interface";
+import { MovieResult } from "../../core/domain";
 
 export const useGetMovieDetail = (fetchFunction: () => Promise<MovieResult>) => {
   
