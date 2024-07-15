@@ -1,17 +1,17 @@
-import { MovieResponse } from "../domain";
+import { MoviesResponse, moviesService, serviceGetMovies } from "../domain";
 import { MovieRepository } from "../infrastructure";
 
-export const MoviesService = (
+export const MoviesService: moviesService = (
   movieRepository: ReturnType<typeof MovieRepository>
 ) => {
-  const getPopularMovies = async (): Promise<MovieResponse> => {
-    return await movieRepository.fetchPopularMovies();
+  const getPopularMovies: serviceGetMovies =  (): Promise<MoviesResponse> => {
+    return  movieRepository.fetchPopularMovies();
   };
-  const getTopRatedMovies = async (): Promise<MovieResponse> => {
-    return await movieRepository.fetchTopRatedMovies();
+  const getTopRatedMovies: serviceGetMovies =  (): Promise<MoviesResponse> => {
+    return  movieRepository.fetchTopRatedMovies();
   };
-  const getNextReleases = async (): Promise<MovieResponse> => {
-    return await movieRepository.fetchNextReleases();
+  const getNextReleases: serviceGetMovies =  (): Promise<MoviesResponse> => {
+    return  movieRepository.fetchNextReleases();
   };
 
   return {
