@@ -8,7 +8,6 @@ import {
 import { useGetNearbyCinemas } from "../../customHooks";
 import { Cinema, Location } from "../../../core/domain";
 
-const libraries: "places"[] = ["places"];
 const mapContainerStyle = {
   width: "100%",
   height: "60vh",
@@ -17,6 +16,7 @@ const options = {
   disableDefaultUI: true,
   zoomControl: true,
 };
+const libraries: "places"[] = ["places"];
 
 export const CinemaMap = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -37,7 +37,7 @@ export const CinemaMap = () => {
           lng: position.coords.longitude,
         });
       },
-      () => null
+      () => null,
     );
   }, []);
 
@@ -62,6 +62,7 @@ export const CinemaMap = () => {
         ...options,
         mapId: process.env.REACT_APP_MAP_ID_STYLE,
       }}
+      mapContainerClassName="map-container"
     >
       {loading ? (
         <div>Loading cinemas...</div>

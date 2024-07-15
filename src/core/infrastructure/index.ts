@@ -1,3 +1,4 @@
-export * from './MovieDetailRepository'
-export * from './MovieRepository'
-export * from './CinemaRepository'
+export * from './MovieDetailRepository/MovieDetailRepository'
+export * from './MovieRepository/MovieRepository'
+export * from './CinemaRepository/CinemaRepository'
+export * from './LocalStorage/localStorage'

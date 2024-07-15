@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === "development") {
   server.start();
 }
 
-function App() {
+const App = () => {
   return <AppRouter />;
 }
 

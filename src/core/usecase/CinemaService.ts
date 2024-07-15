@@ -1,5 +1,5 @@
 import { Cinema, Location } from "../domain/Cinema.interface";
-import { CinemaRepository } from "../infrastructure/CinemaRepository";
+import { CinemaRepository } from "../infrastructure/CinemaRepository/CinemaRepository";
 
 export const CinemaService = {
   getNearbyCinemas: async (location: Location): Promise<Cinema[]> => {

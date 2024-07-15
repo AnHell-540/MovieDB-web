@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { CinemaService } from "../../core/usecase";
-import { Cinema, Location } from "../../core/domain";
+import { Cinema, Location, useGetNearbyCinemasHookType } from "../../core/domain";
 
-export const useGetNearbyCinemas = (location: Location | null) => {
+export const useGetNearbyCinemas: useGetNearbyCinemasHookType = (location: Location | null) => {
   const [cinemas, setCinemas] = useState<Cinema[]>([]);
   const [loading, setLoading] = useState(true);
 

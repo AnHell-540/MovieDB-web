@@ -1,6 +1,7 @@
-import { Cinema, Location } from "../domain/Cinema.interface";
+import { Cinema, cinemaRepository, Location, Request } from "../../domain/Cinema.interface";
 
-export const CinemaRepository = {
+export const CinemaRepository: cinemaRepository = {
+
   getNearbyCinemas: async (location: Location): Promise<Cinema[]> => {
     return new Promise((resolve, reject) => {
       if (!window.google || !window.google.maps) {
@@ -11,7 +12,7 @@ export const CinemaRepository = {
       const service = new window.google.maps.places.PlacesService(
         document.createElement("div")
       );
-      const request = {
+      const request: Request = {
         location: new google.maps.LatLng(location.lat, location.lng),
         radius: 30000,
         type: "movie_theater",
@@ -19,7 +20,7 @@ export const CinemaRepository = {
 
       service.nearbySearch(request, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-          const cinemas = results
+          const cinemas: Cinema[] = results
             .map((place) => {
               if (place.geometry && place.geometry.location) {
                 return {
