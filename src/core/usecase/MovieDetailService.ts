@@ -1,10 +1,10 @@
 import { MovieDetailRepository } from "../infrastructure";
-import { MovieResult } from "../domain/Movies.interface";
+import { MovieDetail, serviceGetMovieDetail, movieDetailService } from "../domain";
 
-export const MovieDetailService = (
+export const MovieDetailService: movieDetailService = (
   movieDetailRepository: ReturnType<typeof MovieDetailRepository>
 ) => {
-  const getMovieDetail = async (id: string): Promise<MovieResult> => {
+  const getMovieDetail: serviceGetMovieDetail = async (id: string): Promise<MovieDetail> => {
     return await movieDetailRepository.fetchMovieDetail(id);
   };
 
