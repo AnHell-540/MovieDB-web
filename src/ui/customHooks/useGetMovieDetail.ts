@@ -1,28 +1,25 @@
 import { useEffect, useState } from "react";
-import { MovieResult } from "../../core/domain";
+import { MovieDetail, useGetMovieDetailHookType, getMovieDetail } from "../../core/domain";
 
-export const useGetMovieDetail = (fetchFunction: () => Promise<MovieResult>) => {
+export const useGetMovieDetail: useGetMovieDetailHookType = (fetchFunction: () => Promise<MovieDetail>) => {
   
-  const emptyMovie: MovieResult = {
+  const emptyMovie: MovieDetail = {
     backdrop_path: "",
-    genres:[{
-      name: ""
-    }],
-    id: "",
+    genres:[''],
     overview: "",
-    popularity: 0,
     poster_path: "",
     release_date: "",
-    runtime:"",
+    runtime: 0,
     tagline: "",
     title: "",
     vote_average: 0,
+    id: 0
   };
-  const [movie, setMovie] = useState<MovieResult>(emptyMovie);
+  const [movie, setMovie] = useState<MovieDetail>(emptyMovie);
 
-  const getMovie = async (): Promise<MovieResult> => {
+  const getMovieDetail: getMovieDetail = async (): Promise<MovieDetail> => {
     try {
-      const response: MovieResult = await fetchFunction()
+      const response: MovieDetail = await fetchFunction()
       const movie = await response
       setMovie(movie);
       return response
@@ -33,7 +30,7 @@ export const useGetMovieDetail = (fetchFunction: () => Promise<MovieResult>) => 
   };
 
   useEffect(() => {
-    getMovie();
+    getMovieDetail();
   }, []);
 
   return {movie}

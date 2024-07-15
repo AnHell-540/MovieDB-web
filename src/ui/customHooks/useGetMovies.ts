@@ -1,19 +1,20 @@
-import { MovieResponse, MovieResult } from "../../core/domain";
+import { MoviesResponse, MovieData, useGetMoviesHookType, hookGetMovies} from "../../core/domain";
 import { useEffect, useState } from "react";
 
-export const useGetMovies = (fetchFunction: () => Promise<MovieResponse>) => {
-  const [movies, setMovies] = useState<MovieResult[]>([]);
+export const useGetMovies: useGetMoviesHookType = (fetchFunction: () => Promise<MoviesResponse>) => {
+  const [movies, setMovies] = useState<MovieData[]>([]);
   const [loading, setLoading] = useState<boolean>(false)
 
-  const getMovies = async () => {
+  const getMovies: hookGetMovies = async () => {
     try {
       setLoading(true)
-      const response: MovieResponse = await fetchFunction()
+      const response: MoviesResponse = await fetchFunction()
       const movieList = response.results;
       setMovies(movieList);
+      return movieList
     } catch (e) {
-      console.error(e);
-      throw new Error("Error");
+      console.error('useGetMovies/getMovies - Error: --');
+      throw e
     } finally {
       setLoading(false)
     }

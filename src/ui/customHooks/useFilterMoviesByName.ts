@@ -1,18 +1,26 @@
 import { useState, ChangeEvent } from "react";
-import { MovieResult } from "../../core/domain";
+import { MovieData } from "../../core/domain";
 
-export const useFilterMoviesByName = (initialMovies: MovieResult[]) => {
-  const [filter, setFilter] = useState<string>("");
+interface IfilterMovies {
+  ({ target: { value }, }: ChangeEvent<HTMLInputElement>): void
+}
 
-  const filterMovies = ({
+export const useFilterMoviesByName = (initialMovies: MovieData[]) => {
+  const [filter, setFilter] = useState<string>('');
+
+  const filterMovies:IfilterMovies = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>): void => {
     setFilter(value);
   }
 
-  const filteredMovies = initialMovies.filter((item: MovieResult) =>
-    item.title.toLowerCase().includes(filter.toLowerCase())
+
+  const filteredMovies = initialMovies.filter((item: MovieData) => {
+    const title = item.title || ''
+    return title.toLowerCase().includes(filter.toLowerCase())
+  }
   );
 
   return { filterMovies, filteredMovies };
 }
+
