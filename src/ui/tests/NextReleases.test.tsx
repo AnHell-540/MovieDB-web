@@ -1,4 +1,4 @@
-import { Home } from "../views";
+import { NextReleases } from "../views";
 import {
   fireEvent,
   screen,
@@ -13,17 +13,17 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 const storedMovie = {
-  id: 653346,
-  poster_path: "/gKkl37BQuKTanygYQG1pyYgLVgf.jpg",
-  title: "Kingdom of the Planet of the Apes",
-  vote_average: 6.894,
+  id: 573435,
+  poster_path: "/nP6RliHjxsz4irTKsxe8FRhKZYl.jpg",
+  title: "Bad Boys: Ride or Die",
+  vote_average: 7.581
 };
 
-describe("Home component", () => {
+describe("NextReleases component", () => {
   test("render basic info", () => {
-    render(<Home />);
+    render(<NextReleases />);
 
-    const title = screen.getByText(/Popular Movies/i);
+    const title = screen.getByText(/Next Releases/i);
     expect(title).toBeInTheDocument();
 
     const input = screen.getByPlaceholderText(/Search movies/i);
@@ -33,35 +33,35 @@ describe("Home component", () => {
     expect(movieCount).toBeInTheDocument();
   });
 
-  test("render MovieList and MovieCard", async () => {
-    render(<Home />);
+  test("render MovieList and MovieCards", async () => {
+    render(<NextReleases />);
 
-    const movieCards = await screen.findAllByText(/Apes/i);
+    const movieCards = await screen.findAllByText(/Bad boys/i);
     const movieCardsRole = screen.getAllByRole("movie-card");
     expect(movieCards.length).toBe(1);
     expect(movieCardsRole.length).toBe(20);
   });
 
   test("filter movies by name", async () => {
-    render(<Home />);
+    render(<NextReleases />);
 
     const loader = await screen.findByTestId("loader");
     await waitForElementToBeRemoved(loader);
 
-    const movieCards = await screen.findAllByText(/apes/i);
+    const movieCards = await screen.findAllByText(/bad boys/i);
     expect(movieCards[0]).toBeInTheDocument();
 
     const searchInput = screen.getByPlaceholderText("Search Movies");
-    fireEvent.change(searchInput, { target: { value: "civil" } });
+    fireEvent.change(searchInput, { target: { value: "hit" } });
 
     expect(movieCards[0]).not.toBeInTheDocument();
-    const movieCardsFiltered = await screen.findAllByText(/civil/i);
+    const movieCardsFiltered = await screen.findAllByText(/hit/i);
     expect(movieCardsFiltered.length).toBe(1);
     expect(movieCardsFiltered[0]).toBeInTheDocument();
   });
 
   test("renders loader before MovieCards", async () => {
-    render(<Home />);
+    render(<NextReleases />);
 
     const loader = await screen.findByTestId("loader");
     expect(loader).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe("Home component", () => {
   });
 
   test("add movie to favorites when pressing the button", async () => {
-    render(<Home />);
+    render(<NextReleases />);
 
     const loader = await screen.findByTestId("loader");
     await waitForElementToBeRemoved(loader);
@@ -89,14 +89,14 @@ describe("Home component", () => {
       throw new Error("FavButton not found");
     }
 
-    const movieFromLocalStorage = localStorage.getItem("653346");
+    const movieFromLocalStorage = localStorage.getItem("573435");
     expect(movieFromLocalStorage).toBeTruthy();
   });
 
   test("delete movie from favorites when pressing the button", async () => {
-    render(<Home />);
+    render(<NextReleases />);
 
-    localStorage.setItem("653346", JSON.stringify(storedMovie));
+    localStorage.setItem("573435", JSON.stringify(storedMovie));
 
     const loader = await screen.findByTestId("loader");
     await waitForElementToBeRemoved(loader);
@@ -111,7 +111,7 @@ describe("Home component", () => {
       throw new Error("FavButton not found");
     }
 
-    const movieFromLocalStorage = localStorage.getItem("653346");
+    const movieFromLocalStorage = localStorage.getItem("573435");
     expect(movieFromLocalStorage).toBeFalsy();
   });
 });
