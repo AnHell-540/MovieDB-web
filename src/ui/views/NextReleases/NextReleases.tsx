@@ -2,7 +2,7 @@ import { MovieRepository } from "../../../core/infrastructure";
 import { MoviesService } from "../../../core/usecase";
 import { useFilterMoviesByName, useGetMovies } from "../../customHooks";
 import { TitleAndInput } from "../../components";
-import MovieList from "../../components/MovieList";
+import { MovieList } from "../../components/MovieList";
 import style from "../Home/Home.module.css";
 
 const movieRepository = MovieRepository();

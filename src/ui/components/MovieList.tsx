@@ -7,7 +7,7 @@ interface MovieListProps {
   movies: MovieData[]
 }
 
-const MovieList = ({ movies }: MovieListProps) => {
+export const MovieList = ({ movies }: MovieListProps) => {
   return (
     <div role="list" className={style.movie_list_container}>
       {movies.map((movie) => (
@@ -16,5 +16,3 @@ const MovieList = ({ movies }: MovieListProps) => {
     </div>
   );
 };
-
-export default MovieList;

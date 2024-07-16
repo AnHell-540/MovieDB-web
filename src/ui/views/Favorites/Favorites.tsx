@@ -15,6 +15,8 @@ export const Favorites = () => {
     setMovies((prevMovies) => prevMovies.filter((m) => m.id !== movie.id));
   };
 
+  
+
   return (
     <div className={style.container}>
       <TitleAndInput title="Favorite Movies" onChange={filterMovies} />
@@ -27,6 +29,7 @@ export const Favorites = () => {
         {loading ? (
           <span className={style.loader} data-testid="loader"></span>
         ) : (
+          filteredMovies.length !== 0 ? 
           <div role="list" className={style.movie_list_container}>
             {filteredMovies.map((movie) => (
               <FavoriteMovieCard
@@ -36,6 +39,8 @@ export const Favorites = () => {
               />
             ))}
           </div>
+          :
+          <span>There are no favorite movies <u>yet.</u>  &lt;3</span>
         )}
       </main>
     </div>
