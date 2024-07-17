@@ -15,7 +15,7 @@ export const Movie = () => {
     window.scroll(0, 0);
   }, [location]);
 
-  const movieDetailRepository = MovieDetailRepository();
+  const movieDetailRepository = MovieDetailRepository
   const movieDetailService = MovieDetailService(movieDetailRepository);
 
   const [params] = useSearchParams();

@@ -1,25 +1,24 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MovieData } from "../../../core/domain";
-import style from "./MovieCard.module.css";
 import { MovieRating } from "../MovieRating";
-import {
-  saveToFavoritesInLocalStorage,
-  deleteFavoriteFromLocalStorage,
-  isMovieInLocalStorage,
-} from "../../../core/infrastructure";
-import { useState } from "react";
-import { SVGAdd } from "../SVG/SVGAdd";
-import { SVGDelete } from "../SVG/SVGDelete";
+import { SVGAdd, SVGDelete } from "../SVG";
+import { FavoritesService } from "../../../core/usecase";
+import { FavoritesRepository } from "../../../core/infrastructure";
+import style from "./MovieCard.module.css";
 
 interface MovieCardProps {
   movie: MovieData;
 }
+const favoritesRepository = FavoritesRepository
+const {deleteFromFavorites, isMovieInFavorites, saveMovieToFavorites} = FavoritesService( favoritesRepository)
 
 export const MovieCard = ({ movie }: MovieCardProps) => {
+  
   const imgBaseUrl = process.env.REACT_APP_CARD_IMAGE;
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(
-    isMovieInLocalStorage(movie.id.toString())
+    isMovieInFavorites((movie.id).toString())
   );
 
   const handleFavButtonClick = (
@@ -27,9 +26,9 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     if (!isFavorite) {
-      saveToFavoritesInLocalStorage(movie);
+      saveMovieToFavorites(movie);
     } else {
-      deleteFavoriteFromLocalStorage(movie);
+      deleteFromFavorites(movie);
     }
     setIsFavorite(!isFavorite);
     event.stopPropagation();

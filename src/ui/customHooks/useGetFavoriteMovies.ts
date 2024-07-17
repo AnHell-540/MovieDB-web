@@ -7,7 +7,7 @@ import { getFavoriteMoviesHookType } from "../../core/domain/FavoriteRepository.
 const favoritesRepository = FavoritesRepository;
 const { getFavoriteMovies } = FavoritesService(favoritesRepository);
 
-export const useGetMoviesFromLocalStorage: getFavoriteMoviesHookType = () => {
+export const useGetFavoriteMovies: getFavoriteMoviesHookType = () => {
   const [movies, setMovies] = useState<MovieData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 

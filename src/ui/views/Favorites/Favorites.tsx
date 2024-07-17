@@ -1,21 +1,23 @@
 import style from "../Home/Home.module.css";
 import { useFilterMoviesByName } from "../../customHooks";
-import { useGetMoviesFromLocalStorage } from "../../customHooks/useGetMoviesFromLocalStorage";
+import { useGetFavoriteMovies } from "../../customHooks/useGetFavoriteMovies";
 import { TitleAndInput } from "../../components";
 import { FavoriteMovieCard } from "../../components/MovieCard/FavoriteMovieCard";
-import { deleteFavoriteFromLocalStorage } from "../../../core/infrastructure";
+import { FavoritesRepository } from "../../../core/infrastructure";
+import { FavoritesService } from "../../../core/usecase/FavoritesService";
 import { MovieData } from "../../../core/domain";
 
+const favoritesRepository = FavoritesRepository;
+const { deleteFromFavorites } = FavoritesService(favoritesRepository);
+
 export const Favorites = () => {
-  const { movies, setMovies, loading } = useGetMoviesFromLocalStorage();
+  const { movies, setMovies, loading } = useGetFavoriteMovies();
   const { filterMovies, filteredMovies } = useFilterMoviesByName(movies);
 
   const handleDeleteFavorite = (movie: MovieData) => {
-    deleteFavoriteFromLocalStorage(movie);
+    deleteFromFavorites(movie);
     setMovies((prevMovies) => prevMovies.filter((m) => m.id !== movie.id));
   };
-
-  
 
   return (
     <div className={style.container}>
@@ -28,8 +30,7 @@ export const Favorites = () => {
 
         {loading ? (
           <span className={style.loader} data-testid="loader"></span>
-        ) : (
-          filteredMovies.length !== 0 ? 
+        ) : filteredMovies.length !== 0 ? (
           <div role="list" className={style.movie_list_container}>
             {filteredMovies.map((movie) => (
               <FavoriteMovieCard
@@ -39,8 +40,10 @@ export const Favorites = () => {
               />
             ))}
           </div>
-          :
-          <span>There are no favorite movies <u>yet.</u>  &lt;3</span>
+        ) : (
+          <span>
+            There are no favorite movies <u>yet.</u> &lt;3
+          </span>
         )}
       </main>
     </div>
