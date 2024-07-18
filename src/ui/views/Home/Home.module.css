@@ -1,8 +1,12 @@
 .container {
   width: auto;
-  margin-inline: 7.5em;
+  padding-inline: 7.5em;
+  margin: auto;
   margin-top: 10em;
   margin-bottom: 3vw;
+  max-width: 1920px;
+  min-width: 740px;
+  min-height: 1080px;
 }
 
 .movie_list_container {
@@ -33,6 +37,7 @@
 .title {
   margin: 0;
   margin-bottom: 0.5em;
+  font-size: clamp(3em, 3.5vw, 5em);
 }
 
 .info {
