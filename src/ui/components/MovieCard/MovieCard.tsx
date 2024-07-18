@@ -2,7 +2,7 @@ import { FavoritesRepository } from "../../../core/infrastructure";
 import { FavoritesService } from "../../../core/usecase";
 import { movieCardFavButton } from "./movieCardFavButton";
 import { MovieData } from "../../../core/domain";
-import { MovieRating } from "../MovieRating";
+import { MovieRating } from "../MovieRating/MovieRating";
 import { SVGAdd, SVGDelete } from "../SVG";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -35,8 +35,6 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
         {movie.vote_average > 0 && (
           <MovieRating
             movieRating={movie.vote_average}
-            classContainer={style.rating}
-            classValue={style.rating_value}
           />
         )}
 
@@ -46,19 +44,19 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
             src={imgBaseUrl + movie.poster_path}
             alt={movie.title}
           />
+          <button
+            className={style.favButton}
+            onClick={(e) => {
+              handleFavButtonClick(e);
+            }}
+          >
+            {!isFavorite ? <SVGAdd /> : <SVGDelete />}
+          </button>
         </div>
       </div>
 
       <div className={style.title_favButton}>
         <h2 className={style.card_title}>{movie.title}</h2>
-        <button
-          className={style.favButton}
-          onClick={(e) => {
-            handleFavButtonClick(e);
-          }}
-        >
-          {!isFavorite ? <SVGAdd /> : <SVGDelete />}
-        </button>
       </div>
     </div>
   );

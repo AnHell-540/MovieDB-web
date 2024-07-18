@@ -1,16 +1,20 @@
+import styleCard from './MovieRating.module.css'
+import styleMovieInfo from './MovieRatingInfo.module.css'
+
 interface MovieRatingProps {
   movieRating: number,
   width?: number,
   height?: number,
-  classContainer: string,
-  classValue: string
+  movieInfo?: boolean
 }
 
-export const MovieRating = ({movieRating, width = 18, height = 18, classContainer, classValue}: MovieRatingProps) => {
+export const MovieRating = ({movieRating, width = 18, height = 18, movieInfo= false}: MovieRatingProps) => {
 
   const svgPath = process.env.REACT_APP_SVG_RATING
+  const usedStyle = movieInfo === false ? styleCard : styleMovieInfo
+  
   return (
-    <div className={classContainer}>
+    <div className={usedStyle.rating}>
       <svg
         width={width}
         height={height}
@@ -20,7 +24,7 @@ export const MovieRating = ({movieRating, width = 18, height = 18, classContaine
       >
         <path d={svgPath} />
       </svg>
-      <p className={classValue} role="rating">
+      <p className={styleCard.rating_value} role="rating">
         {movieRating.toFixed(1)}
       </p>
     </div>

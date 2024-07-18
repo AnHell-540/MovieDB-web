@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { MovieData } from "../../../core/domain";
 import style from '../MovieCard/MovieCard.module.css'
-import { MovieRating } from "../MovieRating";
+import { MovieRating } from "../MovieRating/MovieRating";
+import { SVGDelete } from "../SVG";
 
 interface MovieCardProps {
   movie: MovieData;
@@ -33,8 +34,6 @@ export const FavoriteMovieCard = ({
         {movie.vote_average > 0 && (
           <MovieRating
             movieRating={movie.vote_average}
-            classContainer={style.rating}
-            classValue={style.rating_value}
           />
         )}
 
@@ -44,26 +43,17 @@ export const FavoriteMovieCard = ({
             src={imgBaseUrl + movie.poster_path}
             alt={movie.title}
           />
+        <button
+          className={style.favButton}
+          onClick={(event) => handleDeleteFavButtonClick(movie, event)}
+        >
+          <SVGDelete />
+        </button>
         </div>
       </div>
 
       <div className={style.title_favButton}>
         <h2 className={style.card_title}>{movie.title}</h2>
-        <button
-          className={style.favButton}
-          onClick={(event) => handleDeleteFavButtonClick(movie, event)}
-        >
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 384 512"
-              width={19}
-              height={17}
-              fill="#FF0000"
-              className={style.svg}
-            >
-              <path d={process.env.REACT_APP_SVG_DELETE} />
-            </svg>
-        </button>
       </div>
     </div>
   );

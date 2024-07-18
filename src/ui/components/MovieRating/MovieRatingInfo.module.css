@@ -1,0 +1,14 @@
+.rating {
+  width: 3.75em;
+  height: 2.5em;
+  background-color: #000000d8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rating_value {
+  margin-left: 4px;
+  color: #FFAD49;
+}

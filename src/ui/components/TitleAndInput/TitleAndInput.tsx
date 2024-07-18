@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../../views/Home/Home.module.css";
+import style from "./TitleAndInput.module.css";
 
 interface TitleAndInputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,7 +12,7 @@ export const TitleAndInput: React.FC<TitleAndInputProps> = ({
 }) => {
   return (
     <section>
-      <h1 className={`${style.title} ${style.poppins_bold}`} role="title">
+      <h1 className={style.title} role="title">
         {title}
       </h1>
       <div>

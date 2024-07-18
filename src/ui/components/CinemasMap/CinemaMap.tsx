@@ -21,7 +21,7 @@ const options = {
 const libraries: "places"[] = ["places"];
 
 const cinemaRepository = CinemaRepository
-const cinemaService = CinemaService
+const cinemaService = CinemaService(cinemaRepository)
 
 export const CinemaMap = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -46,7 +46,7 @@ export const CinemaMap = () => {
     );
   }, []);
 
-  const { cinemas, loading } = useGetNearbyCinemas(userLocation, cinemaRepository );
+  const { cinemas, loading } = useGetNearbyCinemas(userLocation, cinemaService );
   const [selectedCinema, setSelectedCinema] = useState<Cinema | null>(null);
 
   const getHrefFromCinemaPhotosAtt = (att: string) => {

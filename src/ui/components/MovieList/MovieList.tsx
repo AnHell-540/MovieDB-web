@@ -1,7 +1,7 @@
 
-import { MovieCard } from "./MovieCard/MovieCard";
-import style from '../views/Home/Home.module.css'
-import { MovieData } from "../../core/domain";
+import { MovieCard } from "../MovieCard/MovieCard";
+import style from './MovieList.module.css'
+import { MovieData } from "../../../core/domain";
 
 interface MovieListProps {
   movies: MovieData[]

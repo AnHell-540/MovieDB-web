@@ -1,13 +1,13 @@
-import { MovieDetail } from '../../core/domain';
-import style from '../views/MovieDetail/Movie.module.css'
+import { MovieDetail } from "../../../core/domain";
+import style from "./ImageAndTitle.module.css";
 
 interface ImageAndTitleProps {
-  movie: MovieDetail
+  movie: MovieDetail;
 }
 
 const imgUrl = "https://image.tmdb.org/t/p/w1280";
 
-export const ImageAndTitle = ({movie}: ImageAndTitleProps) => {
+export const ImageAndTitle = ({ movie }: ImageAndTitleProps) => {
   return (
     <div className={style.header}>
       <div className={style.header_img_container}>
