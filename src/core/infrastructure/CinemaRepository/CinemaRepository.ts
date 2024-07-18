@@ -1,7 +1,7 @@
-import { Cinema, cinemaRepository, Location, Request } from "../../domain/Cinema.interface";
+import { Cinema, Location, Request } from "../../domain";
+import { ICinemaRepository } from "../../domain";
 
-export const CinemaRepository: cinemaRepository = {
-
+export const CinemaRepository: ICinemaRepository = {
   getNearbyCinemas: async (location: Location): Promise<Cinema[]> => {
     return new Promise((resolve, reject) => {
       if (!window.google || !window.google.maps) {
