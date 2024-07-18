@@ -1,17 +1,14 @@
-import {
-  MovieData,
-  MoviesResponse,
-} from "../../domain";
-import { MoviesResponseDTOI, MovieDataDTOI } from "./MovieRepository.interface";
+import { MovieData, MoviesResponse } from "../../domain";
+import { MoviesResponseDTO, MovieDataDTO } from "./MovieRepository.dto";
 
 interface MovieDataMapper {
-  (moviesData: MovieDataDTOI): MovieData;
+  (moviesData: MovieDataDTO): MovieData;
 }
 interface MovieResponseMapper {
-  (moviesResponse: MoviesResponseDTOI): MoviesResponse;
+  (moviesResponse: MoviesResponseDTO): MoviesResponse;
 }
 
-export const DTOtoMovieData: MovieDataMapper = (movieDataDTO: MovieDataDTOI) => {
+const DTOtoMovieData: MovieDataMapper = (movieDataDTO: MovieDataDTO) => {
   return {
     id: movieDataDTO.id,
     poster_path: movieDataDTO.poster_path,
@@ -20,7 +17,7 @@ export const DTOtoMovieData: MovieDataMapper = (movieDataDTO: MovieDataDTOI) => 
   };
 };
 export const DTOtoMovieResponse: MovieResponseMapper = (
-  movieResponseDTO: MoviesResponseDTOI
+  movieResponseDTO: MoviesResponseDTO
 ) => {
   return {
     results: movieResponseDTO.results.map(DTOtoMovieData),

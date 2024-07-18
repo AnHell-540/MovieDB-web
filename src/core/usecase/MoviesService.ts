@@ -1,16 +1,16 @@
-import { MoviesResponse, moviesService, serviceGetMovies } from "../domain";
-import { MovieRepository } from "../infrastructure";
+import { MoviesResponse } from "../domain";
+import { IMovieRepository } from "../domain/MovieRepository.interface";
 
-export const MoviesService: moviesService = (
-  movieRepository: ReturnType<typeof MovieRepository>
+export const MoviesService = (
+  movieRepository: IMovieRepository
 ) => {
-  const getPopularMovies: serviceGetMovies =  (): Promise<MoviesResponse> => {
+  const getPopularMovies =  (): Promise<MoviesResponse> => {
     return  movieRepository.fetchPopularMovies();
   };
-  const getTopRatedMovies: serviceGetMovies =  (): Promise<MoviesResponse> => {
+  const getTopRatedMovies =  (): Promise<MoviesResponse> => {
     return  movieRepository.fetchTopRatedMovies();
   };
-  const getNextReleases: serviceGetMovies =  (): Promise<MoviesResponse> => {
+  const getNextReleases =  (): Promise<MoviesResponse> => {
     return  movieRepository.fetchNextReleases();
   };
 
