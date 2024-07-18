@@ -1,10 +1,9 @@
 import style from "../Home/Home.module.css";
-import { useFilterMoviesByName } from "../../customHooks";
-import { useGetFavoriteMovies } from "../../customHooks/useGetFavoriteMovies";
+import { useFilterMoviesByName, useGetFavoriteMovies } from "../../customHooks";
 import { TitleAndInput } from "../../components";
-import { FavoriteMovieCard } from "../../components/FavoriteMovieCard/FavoriteMovieCard";
+import { FavoriteMovieCard } from "../../components";
 import { FavoritesRepository } from "../../../core/infrastructure";
-import { FavoritesService } from "../../../core/usecase/FavoritesService";
+import { FavoritesService } from "../../../core/usecase";
 import { MovieData } from "../../../core/domain";
 
 const favoritesRepository = FavoritesRepository;
