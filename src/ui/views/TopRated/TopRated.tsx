@@ -5,7 +5,7 @@ import { TitleAndInput } from "../../components";
 import { MovieList } from "../../components/MovieList";
 import style from "../Home/Home.module.css";
 
-const movieRepository = MovieRepository();
+const movieRepository = MovieRepository
 const moviesService = MoviesService(movieRepository);
 
 export const TopRated = () => {

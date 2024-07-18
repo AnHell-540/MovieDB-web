@@ -1,38 +1,29 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { FavoritesRepository } from "../../../core/infrastructure";
+import { FavoritesService } from "../../../core/usecase";
+import { movieCardFavButton } from "./movieCardFavButton";
 import { MovieData } from "../../../core/domain";
 import { MovieRating } from "../MovieRating";
 import { SVGAdd, SVGDelete } from "../SVG";
-import { FavoritesService } from "../../../core/usecase";
-import { FavoritesRepository } from "../../../core/infrastructure";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import style from "./MovieCard.module.css";
 
 interface MovieCardProps {
   movie: MovieData;
 }
-const favoritesRepository = FavoritesRepository
-const {deleteFromFavorites, isMovieInFavorites, saveMovieToFavorites} = FavoritesService( favoritesRepository)
+const favoritesRepository = FavoritesRepository;
+const { isMovieInFavorites } = FavoritesService(favoritesRepository);
 
 export const MovieCard = ({ movie }: MovieCardProps) => {
-  
   const imgBaseUrl = process.env.REACT_APP_CARD_IMAGE;
   const navigate = useNavigate();
-  const [isFavorite, setIsFavorite] = useState(
-    isMovieInFavorites((movie.id).toString())
-  );
-
-  const handleFavButtonClick = (
-    movie: MovieData,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    if (!isFavorite) {
-      saveMovieToFavorites(movie);
-    } else {
-      deleteFromFavorites(movie);
-    }
-    setIsFavorite(!isFavorite);
-    event.stopPropagation();
-  };
+  const [isFavorite, setIsFavorite] = useState(isMovieInFavorites(movie));
+  const handleFavButtonClick = movieCardFavButton({
+    movie,
+    isFavorite,
+    setIsFavorite,
+    favoritesRepository,
+  });
 
   return (
     <div
@@ -62,15 +53,11 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
         <h2 className={style.card_title}>{movie.title}</h2>
         <button
           className={style.favButton}
-          onClick={(event) => {
-            handleFavButtonClick(movie, event);
+          onClick={(e) => {
+            handleFavButtonClick(e);
           }}
         >
-          {!isFavorite ? (
-            <SVGAdd/>
-          ) : (
-            <SVGDelete/>
-          )}
+          {!isFavorite ? <SVGAdd /> : <SVGDelete />}
         </button>
       </div>
     </div>

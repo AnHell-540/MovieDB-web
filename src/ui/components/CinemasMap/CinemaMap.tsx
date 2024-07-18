@@ -7,6 +7,8 @@ import {
 } from "@react-google-maps/api";
 import { useGetNearbyCinemas } from "../../customHooks";
 import { Cinema, Location } from "../../../core/domain";
+import { CinemaRepository } from "../../../core/infrastructure";
+import { CinemaService } from "../../../core/usecase";
 
 const mapContainerStyle = {
   width: "100%",
@@ -17,6 +19,9 @@ const options = {
   zoomControl: true,
 };
 const libraries: "places"[] = ["places"];
+
+const cinemaRepository = CinemaRepository
+const cinemaService = CinemaService
 
 export const CinemaMap = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -41,7 +46,7 @@ export const CinemaMap = () => {
     );
   }, []);
 
-  const { cinemas, loading } = useGetNearbyCinemas(userLocation);
+  const { cinemas, loading } = useGetNearbyCinemas(userLocation, cinemaRepository );
   const [selectedCinema, setSelectedCinema] = useState<Cinema | null>(null);
 
   const getHrefFromCinemaPhotosAtt = (att: string) => {

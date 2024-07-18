@@ -1,4 +1,4 @@
-export * from './useGetMovies'
+export * from './useGetMovies/useGetMovies'
 export * from './useFilterMoviesByName'
-export * from './useGetMovieDetail'
-export * from './useGetNearbyCinemas'
+export * from './useGetMovieDetail/useGetMovieDetail'
+export * from './useGetNearbyCinemas/useGetNearbyCinemas'

@@ -1,12 +1,12 @@
-import style from "./Movie.module.css";
-import { useSearchParams, useLocation } from "react-router-dom";
-import { useGetMovieDetail } from "../../customHooks";
+import { CinemaMap } from "../../components";
+import { ImageAndTitle } from "../../components";
 import { MovieDetailRepository } from "../../../core/infrastructure";
 import { MovieDetailService } from "../../../core/usecase";
-import { CinemaMap } from "../../components";
+import { MovieInfo } from "../../components";
 import { useEffect } from "react";
-import { ImageAndTitle } from "./ImageAndTitle";
-import { MovieInfo } from "./MovieInfo";
+import { useGetMovieDetail } from "../../customHooks";
+import { useSearchParams, useLocation } from "react-router-dom";
+import style from "./Movie.module.css";
 
 export const Movie = () => {
   const location = useLocation();
