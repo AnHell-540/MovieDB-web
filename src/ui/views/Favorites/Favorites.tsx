@@ -2,7 +2,7 @@ import style from "../Home/Home.module.css";
 import { useFilterMoviesByName } from "../../customHooks";
 import { useGetFavoriteMovies } from "../../customHooks/useGetFavoriteMovies";
 import { TitleAndInput } from "../../components";
-import { FavoriteMovieCard } from "../../components/MovieCard/FavoriteMovieCard";
+import { FavoriteMovieCard } from "../../components/FavoriteMovieCard/FavoriteMovieCard";
 import { FavoritesRepository } from "../../../core/infrastructure";
 import { FavoritesService } from "../../../core/usecase/FavoritesService";
 import { MovieData } from "../../../core/domain";

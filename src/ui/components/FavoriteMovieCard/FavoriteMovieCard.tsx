@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { MovieData } from "../../../core/domain";
-import style from "./MovieCard.module.css";
+import style from '../MovieCard/MovieCard.module.css'
 import { MovieRating } from "../MovieRating";
 
 interface MovieCardProps {
@@ -19,7 +19,6 @@ export const FavoriteMovieCard = ({
     movie: MovieData,
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
-    console.log("FavButton clicked");
     onDeleteFavorite(movie);
     event.stopPropagation();
   };

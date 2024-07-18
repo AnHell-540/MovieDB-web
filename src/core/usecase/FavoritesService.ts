@@ -30,9 +30,9 @@ export const FavoritesService = (movieRepository: IFavoritesRepository) => {
     }
   };
 
-  const isMovieInFavorites = (id: string): boolean => {
+  const isMovieInFavorites = (movie: MovieData): boolean => {
     try {
-      const isInFavorites = movieRepository.isMovieInLocalStorage(id);
+      const isInFavorites = movieRepository.isMovieInLocalStorage(movie);
       return isInFavorites;
     } catch (error) {
       console.log("Error trying to find the movie in favorites: --", error);

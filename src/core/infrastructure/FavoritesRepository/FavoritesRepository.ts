@@ -1,51 +1,58 @@
 import { MovieData, IFavoritesRepository } from "../../domain";
 
-const isNumericKey = (key: string) => {
-  return /^\d+$/.test(key);
-};
+const getFavoriteMovies = () => {
+  const existingFavoritesSTR = localStorage.getItem("favoriteMovies");
+  let favoriteMovies: MovieData[] = [];
+  if (existingFavoritesSTR) {
+    favoriteMovies = JSON.parse(existingFavoritesSTR);
+  }
+  return favoriteMovies
+}
 
 export const FavoritesRepository: IFavoritesRepository = {
   saveToFavoritesInLocalStorage: (movie: MovieData): void => {
     try {
-      const jsonData = JSON.stringify(movie);
-      const key = movie.id.toString();
-      localStorage.setItem(key, jsonData);
-      console.log(`Movie saved to local storage with key ${key}`);
-    } catch (e) {
-      console.error("Error - saveToFavoritesInLocalStorage: -- ", e);
+      const favoriteMovies = getFavoriteMovies()
+
+      favoriteMovies.push(movie);
+      const favoriteMoviesString = JSON.stringify(favoriteMovies);
+      localStorage.setItem("favoriteMovies", favoriteMoviesString);
+    } catch (error) {
+      console.error("Error - saveToFavoritesInLocalStorage: -- ", error);
     }
   },
 
   getFavoritesFromLocalStorage: (): MovieData[] => {
-    const movies: MovieData[] = [];
-    if (localStorage.length) {
-      try {
-        const keys = Object.keys(localStorage).filter(isNumericKey);
-        keys.map((k) => {
-          const movie = localStorage.getItem(k);
-          if (movie) movies.push(JSON.parse(movie) as MovieData);
-        });
-      } catch (e) {
-        console.error("Error - getFavoritesFromLocalStorage: --", e);
-      }
-    }
-    return movies;
-  },
-
-  deleteFavoriteFromLocalStorage: (movie: MovieData) => {
     try {
-      const keyToDelete = movie.id.toString();
-      if (localStorage.getItem(keyToDelete)) {
-        localStorage.removeItem(keyToDelete);
-        console.log(keyToDelete, " movie deleted from Local Storage");
-      }
-    } catch (e) {
-      console.error("Error - deleteFavoriteFromLocalStorage: --", e);
+      const favoriteMovies = getFavoriteMovies()
+      return favoriteMovies;
+    } catch (error) {
+      console.error("Error - getFavoritesFromLocalStorage: -- ", error);
+      return []
     }
   },
 
-  isMovieInLocalStorage: (id: string) => {
-    const exist = localStorage.getItem(id);
-    return exist !== null;
+  deleteFavoriteFromLocalStorage: (movie: MovieData): void => {
+    try {
+      const favoriteMovies = getFavoriteMovies();
+      const index = favoriteMovies.findIndex((m) => m.id === movie.id);
+      if (index!== -1) {
+        favoriteMovies.splice(index, 1);
+        const favoriteMoviesString = JSON.stringify(favoriteMovies);
+        localStorage.setItem("favoriteMovies", favoriteMoviesString);
+      }
+    } catch (error) {
+      console.error("Error - deleteFavoriteFromLocalStorage: -- ", error);
+    }
+  },
+
+  isMovieInLocalStorage: (movie: MovieData): boolean => {
+    try {
+      const favoriteMovies = getFavoriteMovies();
+      return favoriteMovies.some((m) => m.id === movie.id);
+    } catch (error) {
+      console.error("Error - isMovieInLocalStorage: -- ", error);
+      return false;
+    }
   },
 };

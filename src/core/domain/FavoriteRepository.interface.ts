@@ -4,7 +4,7 @@ export interface IFavoritesRepository {
   saveToFavoritesInLocalStorage: (movie: MovieData) => void;
   getFavoritesFromLocalStorage: () => MovieData[];
   deleteFavoriteFromLocalStorage: (movie: MovieData) => void;
-  isMovieInLocalStorage: (id: string) => boolean;
+  isMovieInLocalStorage: (movie: MovieData) => boolean;
 }
 
 export interface getFavoriteMoviesHookType {
