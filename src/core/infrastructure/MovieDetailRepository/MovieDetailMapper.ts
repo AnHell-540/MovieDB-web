@@ -1,5 +1,5 @@
 import { MovieDetail } from "../../domain";
-import { MovieDetailDTO } from "./MovieDetailRepository.interface";
+import { MovieDetailDTO } from "./MovieDetail.dto";
 
 interface MovieDetailMapper {
   (movieDetail: MovieDetailDTO): MovieDetail;
