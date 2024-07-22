@@ -6,6 +6,16 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 jest.mock("../components/CinemasMap/CinemaMap");
 beforeAll(() => {
+
+  Object.defineProperty(window, 'location', {
+    value: {
+      href: 'http://localhost:3000/movie?id=929590',
+      pathname: '/movie',
+      search: '?id=929590',
+    },
+    writable: true,
+  });
+
   server.listen();
 
   const mockGeolocation = {
