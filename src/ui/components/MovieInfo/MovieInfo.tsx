@@ -4,6 +4,8 @@ import { MovieRating } from "../MovieRating/MovieRating";
 import style from "./MovieInfo.module.css";
 import { SVGAdd, SVGDelete } from "../SVG";
 import { useIsFavorite } from "../../customHooks/useFavoriteMovie";
+import { InfoSection } from "./InfoSection/InfoSection";
+import { useState } from "react";
 
 interface ImageAndTitleProps {
   movie: MovieDetail;
@@ -13,14 +15,19 @@ export const MovieInfo = ({ movie }: ImageAndTitleProps) => {
   const genres = movie.genres.join(", ");
   const { isFavorite, setIsFavorite, favoritesRepository } =
     useIsFavorite(movie);
-  console.log("es fav?: ", isFavorite);
-
+  const [isAnimating, setIsAnimating] = useState(false);
   const handleFavButtonClick = movieInfoFavButton({
     movie,
     isFavorite,
     setIsFavorite,
     favoritesRepository,
   });
+  const handleFavButtonAnimation = () => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 200);
+  };
 
   return (
     <>
@@ -50,22 +57,21 @@ export const MovieInfo = ({ movie }: ImageAndTitleProps) => {
             <p className={style.info_section_content}>{genres}</p>
           </div>
           <button
-            className={style.addToFavs}
-            onClick={(e) => handleFavButtonClick(e)}
+            className={`${style.favButton} ${isAnimating ? style.animate : ""}`}
+            onClick={(e) => {
+              handleFavButtonClick(e);
+              handleFavButtonAnimation();
+            }}
           >
             {!isFavorite ? (
               <>
                 <SVGAdd />
-                <span style={{ color: "#FFAD49", marginLeft: "12px" }}>
-                  Add to favorites
-                </span>
+                <span style={style}>Add to favorites</span>
               </>
             ) : (
               <>
                 <SVGDelete />
-                <span style={{ color: "#FFAD49", marginLeft: "12px" }}>
-                  Delete from favorites
-                </span>
+                <span style={style}>Delete from favorites</span>
               </>
             )}
           </button>

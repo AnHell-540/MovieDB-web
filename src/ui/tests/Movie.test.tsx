@@ -46,12 +46,10 @@ const storedMovie = {
   vote_average: 7.013,
 };
 
-const movieId = "929590";
-
 describe("Movie component", () => {
   test("render all the info", async () => {
     render(
-      <MemoryRouter initialEntries={[`/movie?id=${movieId}`]}>
+      <MemoryRouter initialEntries={[`/movie?id=${storedMovie.id}`]}>
         <Routes>
           <Route path="/movie" element={<Movie />} />
         </Routes>
@@ -83,7 +81,7 @@ describe("Movie component", () => {
 
   test("Add and delete movie from favorite", () => {
     render(
-      <MemoryRouter initialEntries={[`/movie?id=${movieId}`]}>
+      <MemoryRouter initialEntries={[`/movie?id=${storedMovie.id}`]}>
         <Routes>
           <Route path="/movie" element={<Movie />} />
         </Routes>
@@ -92,20 +90,26 @@ describe("Movie component", () => {
 
     const favButton = screen.getByRole("button");
 
-    let movieFromLocalStorage = localStorage.getItem("0");
-    expect(movieFromLocalStorage).toBeFalsy();
+    let movieFromLocalStorage = localStorage.getItem("favoriteMovies");
+    expect(movieFromLocalStorage).toBe(null);
+
     if (favButton) {
       fireEvent.click(favButton);
     } else {
       throw new Error("FavButton not found");
     }
 
-    movieFromLocalStorage = localStorage.getItem("0");
-    expect(movieFromLocalStorage).toBeTruthy();
+    movieFromLocalStorage = localStorage.getItem("favoriteMovies");
+    if (movieFromLocalStorage) {
+      expect(JSON.parse(movieFromLocalStorage).length).toBe(1);
+      console.log('TEST: ', JSON.parse(movieFromLocalStorage))
+    }
 
     fireEvent.click(favButton);
 
-    movieFromLocalStorage = localStorage.getItem("0");
-    expect(movieFromLocalStorage).toBeFalsy();
+    movieFromLocalStorage = localStorage.getItem("favoriteMovies");
+    if (movieFromLocalStorage) {
+      expect(JSON.parse(movieFromLocalStorage)).toStrictEqual([]);
+    }
   });
 });

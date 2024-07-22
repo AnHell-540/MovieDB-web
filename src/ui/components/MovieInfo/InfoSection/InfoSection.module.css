@@ -1,0 +1,17 @@
+.container{
+  font-size: 1rem;
+}
+
+.info_section_title {
+  font-size: 1em;
+  margin-top: 2em;
+}
+
+.info_section_content,
+.overview {
+  font-size: clamp(16px, 1.1vw ,24px)
+}
+
+.info_section_content {
+  color: #C3C8D4;
+}

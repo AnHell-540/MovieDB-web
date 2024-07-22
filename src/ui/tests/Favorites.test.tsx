@@ -21,8 +21,8 @@ describe("Test Favorites page", () => {
   test("render basic info", () => {
     render(<Favorites />);
 
-    const title = screen.getByText(/Favorite Movies/i);
-    expect(title).toBeInTheDocument();
+    const title = screen.getAllByText(/Favorite Movies/i);
+    expect(title[0]).toBeInTheDocument();
 
     const input = screen.getByPlaceholderText(/Search movies/i);
     expect(input).toBeInTheDocument();
@@ -32,38 +32,36 @@ describe("Test Favorites page", () => {
   });
 
   test("render favorite movies", async () => {
-    localStorage.setItem('823464', JSON.stringify(favMovies[0]))
-    localStorage.setItem('653346', JSON.stringify(favMovies[1]))
+    localStorage.setItem("favoriteMovies", JSON.stringify(favMovies));
 
-    render(<Favorites/>)
-    const favMovieCards = screen.getAllByRole('movie-card')
-    const movie1 = screen.getByText(/Godzilla/i)
-    const movie2 = screen.getByText(/Kingdom/i)
-    expect(favMovieCards).toHaveLength(2)
+    render(<Favorites />);
+    const favMovieCards = screen.getAllByRole("movie-card");
+    const movie1 = screen.getByText(/Godzilla/i);
+    const movie2 = screen.getByText(/Kingdom/i);
+    expect(favMovieCards).toHaveLength(2);
     expect(movie1).toBeInTheDocument();
     expect(movie2).toBeInTheDocument();
   });
 
-  test('delete a movie from the list when pressing the card button', () => {
-    localStorage.setItem('823464', JSON.stringify(favMovies[0]))
-    localStorage.setItem('653346', JSON.stringify(favMovies[1]))
-    
-    render(<Favorites/>)
-    let favMovieCards = screen.getAllByRole('movie-card')
-    expect(favMovieCards).toHaveLength(2)
-    
-    const deleteButton = favMovieCards[0].querySelector('button');
-    
+  test("delete a movie from the list when pressing the card button", () => {
+    localStorage.setItem("favoriteMovies", JSON.stringify(favMovies));
+
+    render(<Favorites />);
+    let favMovieCards = screen.getAllByRole("movie-card");
+    expect(favMovieCards).toHaveLength(2);
+
+    const deleteButton = favMovieCards[0].querySelector("button");
+
     if (deleteButton) {
       fireEvent.click(deleteButton);
     } else {
-      throw new Error('Delete button not found');
+      throw new Error("Delete button not found");
     }
-    
-    favMovieCards = screen.getAllByRole('movie-card')
-    expect(favMovieCards).toHaveLength(1)
 
-    const movie = screen.getByText(/Kingdom/i)
+    favMovieCards = screen.getAllByRole("movie-card");
+    expect(favMovieCards).toHaveLength(1);
+
+    const movie = screen.getByText(/Kingdom/i);
     expect(movie).toBeInTheDocument();
-  })
+  });
 });

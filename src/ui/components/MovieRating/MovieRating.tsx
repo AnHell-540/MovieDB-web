@@ -13,7 +13,7 @@ export const MovieRating = ({movieRating, width = 18, height = 18, movieInfo= fa
   const svgPath = process.env.REACT_APP_SVG_RATING
   const usedStyle = movieInfo === false ? styleCard : styleMovieInfo
   
-  return (
+  return movieRating > 0 ? (
     <div className={usedStyle.rating}>
       <svg
         width={width}
@@ -28,7 +28,8 @@ export const MovieRating = ({movieRating, width = 18, height = 18, movieInfo= fa
         {movieRating.toFixed(1)}
       </p>
     </div>
-  );
+  ) :
+  null
 };
 
 

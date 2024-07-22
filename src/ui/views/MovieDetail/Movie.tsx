@@ -15,7 +15,7 @@ export const Movie = () => {
     window.scroll(0, 0);
   }, [location]);
 
-  const movieDetailRepository = MovieDetailRepository
+  const movieDetailRepository = MovieDetailRepository;
   const movieDetailService = MovieDetailService(movieDetailRepository);
 
   const [params] = useSearchParams();
@@ -32,7 +32,9 @@ export const Movie = () => {
         <MovieInfo movie={movie} />
       </div>
       <section className={style.map_container}>
-        <h3 role="map" className={style.map_title}>Localización de cines cercanos</h3>
+        <h3 role="map" className={style.map_title}>
+          Localización de cines cercanos
+        </h3>
         <CinemaMap />
       </section>
     </>

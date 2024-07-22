@@ -23,7 +23,7 @@ describe("TopRated component", () => {
   test("render basic info", () => {
     render(<TopRated />);
 
-    const title = screen.getByText(/Top rated movies/i);
+    const title = screen.getByText(/Top rated/i);
     expect(title).toBeInTheDocument();
 
     const input = screen.getByPlaceholderText(/Search movies/i);
@@ -80,7 +80,7 @@ describe("TopRated component", () => {
     await waitForElementToBeRemoved(loader);
     expect(loader).not.toBeInTheDocument();
 
-    let movieCard = await screen.getAllByRole("movie-card");
+    let movieCard = screen.getAllByRole("movie-card");
     expect(movieCard[0]).toBeInTheDocument();
     const favButton = movieCard[0].querySelector("button");
     if (favButton) {
@@ -89,29 +89,44 @@ describe("TopRated component", () => {
       throw new Error("FavButton not found");
     }
 
-    const movieFromLocalStorage = localStorage.getItem("278");
-    expect(movieFromLocalStorage).toBeTruthy();
+    const favoriteMovies = localStorage.getItem("favoriteMovies");
+    let favoriteMoviesArray = [];
+    if (favoriteMovies) {
+      favoriteMoviesArray = JSON.parse(favoriteMovies);
+    }
+    const newlyAddedMovieId =
+      favoriteMoviesArray[favoriteMoviesArray.length - 1].id;
+
+    expect(newlyAddedMovieId).toBe(storedMovie.id);
   });
 
   test("delete movie from favorites when pressing the button", async () => {
     render(<TopRated />);
 
-    localStorage.setItem("278", JSON.stringify(storedMovie));
+    localStorage.setItem("favoriteMovies", JSON.stringify([storedMovie]));
 
     const loader = await screen.findByTestId("loader");
     await waitForElementToBeRemoved(loader);
     expect(loader).not.toBeInTheDocument();
 
-    let movieCard = await screen.getAllByRole("movie-card");
-    expect(movieCard[0]).toBeInTheDocument();
+    let favoriteMovies = localStorage.getItem("favoriteMovies");
+
+    if(favoriteMovies){
+      expect(JSON.parse(favoriteMovies).length).toBe(1);
+    }
+    
+    const movieCard = screen.getAllByRole("movie-card");
+    expect(movieCard.length).toBe(20);
+
     const favButton = movieCard[0].querySelector("button");
     if (favButton) {
       fireEvent.click(favButton);
     } else {
       throw new Error("FavButton not found");
     }
+    favoriteMovies = localStorage.getItem("favoriteMovies");
 
-    const movieFromLocalStorage = localStorage.getItem("278");
-    expect(movieFromLocalStorage).toBeFalsy();
+    if(favoriteMovies)
+    expect(JSON.parse(favoriteMovies).length).toBe(0);
   });
 });

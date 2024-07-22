@@ -18,12 +18,19 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
   const imgBaseUrl = process.env.REACT_APP_CARD_IMAGE;
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(isMovieInFavorites(movie));
+  const [isAnimating, setIsAnimating] = useState(false);
   const handleFavButtonClick = movieCardFavButton({
     movie,
     isFavorite,
     setIsFavorite,
     favoritesRepository,
   });
+  const handleFavButtonAnimation = () => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 200);
+  };
 
   return (
     <div
@@ -32,11 +39,7 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
       role="movie-card"
     >
       <div className={style.img_rating_container}>
-        {movie.vote_average > 0 && (
-          <MovieRating
-            movieRating={movie.vote_average}
-          />
-        )}
+        <MovieRating movieRating={movie.vote_average} />
 
         <div className={style.image_container}>
           <img
@@ -45,9 +48,10 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
             alt={movie.title}
           />
           <button
-            className={style.favButton}
+            className={`${style.favButton} ${isAnimating ? style.animate : ""}`}
             onClick={(e) => {
               handleFavButtonClick(e);
+              handleFavButtonAnimation();
             }}
           >
             {!isFavorite ? <SVGAdd /> : <SVGDelete />}
