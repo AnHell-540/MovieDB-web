@@ -5,7 +5,7 @@ interface ImageAndTitleProps {
   movie: MovieDetail;
 }
 
-const imgUrl = "https://image.tmdb.org/t/p/w1280";
+const imgUrl = process.env.REACT_APP_BACKGROUND_IMAGE;
 
 export const ImageAndTitle = ({ movie }: ImageAndTitleProps) => {
   return (

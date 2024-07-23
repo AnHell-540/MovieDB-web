@@ -19,7 +19,12 @@ const DTOtoMovieData: MovieDataMapper = (movieDataDTO: MovieDataDTO) => {
 export const DTOtoMovieResponse: MovieResponseMapper = (
   movieResponseDTO: MoviesResponseDTO
 ) => {
+  if (!movieResponseDTO || !movieResponseDTO.results) {
+    console.log("Mapper error");
+    return { results: [] };
+  }
+  const results = movieResponseDTO.results.map(DTOtoMovieData);
   return {
-    results: movieResponseDTO.results.map(DTOtoMovieData),
+    results: results,
   };
 };
