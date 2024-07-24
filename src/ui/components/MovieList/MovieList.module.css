@@ -6,9 +6,9 @@
 }
 
 .loader {
-  width: 48px;
-  height: 48px;
-  border: 5px solid #ebeef5b5;
+  width: 84px;
+  height: 84px;
+  border: 10px solid #ebeef5b5;
   border-bottom-color: #ffad49b0;
   border-radius: 50%;
   margin: 0 auto;

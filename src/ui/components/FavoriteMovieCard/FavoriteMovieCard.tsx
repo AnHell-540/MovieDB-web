@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { MovieData } from "../../../core/domain";
-import style from '../MovieCard/MovieCard.module.css'
+import style from "../MovieCard/MovieCard.module.css";
 import { MovieRating } from "../MovieRating/MovieRating";
 import { SVGDelete } from "../SVG";
 
@@ -32,9 +32,7 @@ export const FavoriteMovieCard = ({
     >
       <div className={style.img_rating_container}>
         {movie.vote_average > 0 && (
-          <MovieRating
-            movieRating={movie.vote_average}
-          />
+          <MovieRating movieRating={movie.vote_average} />
         )}
 
         <div className={style.image_container}>
@@ -43,12 +41,12 @@ export const FavoriteMovieCard = ({
             src={imgBaseUrl + movie.poster_path}
             alt={movie.title}
           />
-        <button
-          className={style.favButton}
-          onClick={(event) => handleDeleteFavButtonClick(movie, event)}
-        >
-          <SVGDelete />
-        </button>
+          <button
+            className={style.favButton}
+            onClick={(event) => handleDeleteFavButtonClick(movie, event)}
+          >
+            <SVGDelete />
+          </button>
         </div>
       </div>
 

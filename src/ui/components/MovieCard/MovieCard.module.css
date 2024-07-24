@@ -48,7 +48,7 @@
     right: 10px;
     border-radius: 8px;
     float: right;
-    background-color: #000000d8;
+    background-color: #00000096;
     border-style: none;
     cursor: pointer;
     transition: transform 0.2s;
@@ -56,6 +56,9 @@
 
 .favButton.animate {
     transform: scale(1.1);
+}
+.favButton:hover {
+    background-color: #000000d8;
 }
 
 .title_favButton {

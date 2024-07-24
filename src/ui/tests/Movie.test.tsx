@@ -1,17 +1,21 @@
 import { Movie } from "../views";
-import { screen, render, fireEvent } from "@testing-library/react";
+import {
+  screen,
+  render,
+  fireEvent,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { server } from "./mocks/server";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 jest.mock("../components/CinemasMap/CinemaMap");
 beforeAll(() => {
-
-  Object.defineProperty(window, 'location', {
+  Object.defineProperty(window, "location", {
     value: {
-      href: 'http://localhost:3000/movie?id=929590',
-      pathname: '/movie',
-      search: '?id=929590',
+      href: "http://localhost:3000/movie?id=929590",
+      pathname: "/movie",
+      search: "?id=929590",
     },
     writable: true,
   });
@@ -89,7 +93,7 @@ describe("Movie component", () => {
     screen.debug();
   });
 
-  test("Add and delete movie from favorite", () => {
+  test("Add and delete movie from favorite", async () => {
     render(
       <MemoryRouter initialEntries={[`/movie?id=${storedMovie.id}`]}>
         <Routes>
@@ -98,8 +102,10 @@ describe("Movie component", () => {
       </MemoryRouter>
     );
 
-    const favButton = screen.getByRole("button");
+    const loader = await screen.findByTestId("loader");
+    await waitForElementToBeRemoved(loader);
 
+    const favButton = screen.getByRole("button");
     let movieFromLocalStorage = localStorage.getItem("favoriteMovies");
     expect(movieFromLocalStorage).toBe(null);
 
@@ -112,7 +118,6 @@ describe("Movie component", () => {
     movieFromLocalStorage = localStorage.getItem("favoriteMovies");
     if (movieFromLocalStorage) {
       expect(JSON.parse(movieFromLocalStorage).length).toBe(1);
-      console.log('TEST: ', JSON.parse(movieFromLocalStorage))
     }
 
     fireEvent.click(favButton);

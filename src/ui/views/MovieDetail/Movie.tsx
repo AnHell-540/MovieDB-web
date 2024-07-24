@@ -21,11 +21,17 @@ export const Movie = () => {
   const [params] = useSearchParams();
   const movieId = params.get("id") ?? "";
 
-  const { movie } = useGetMovieDetail(() =>
+  const { movie, loading } = useGetMovieDetail(() =>
     movieDetailService.getMovieDetail(movieId)
   );
 
-  return (
+  return loading ? (
+    <div className={style.loader_container}>
+      <span className={style.loader} data-testid="loader"></span>
+    </div>
+    )
+  :
+  (
     <>
       <div className={style.container}>
         <ImageAndTitle movie={movie} />
@@ -38,5 +44,5 @@ export const Movie = () => {
         <CinemaMap />
       </section>
     </>
-  );
+  )
 };

@@ -18,9 +18,11 @@ export const useGetMovieDetail: useGetMovieDetailHookType = (
     id: 0,
   };
   const [movie, setMovie] = useState<MovieDetail>(emptyMovie);
+  const [loading, setLoading] = useState<boolean>(false)
 
   const getMovieDetail = async (): Promise<MovieDetail> => {
     try {
+      setLoading(true)
       const response: MovieDetail = await fetchFunction();
       const movie = await response;
       setMovie(movie);
@@ -28,6 +30,8 @@ export const useGetMovieDetail: useGetMovieDetailHookType = (
     } catch (e) {
       console.error(e);
       throw new Error("Error fetch.");
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -35,5 +39,5 @@ export const useGetMovieDetail: useGetMovieDetailHookType = (
     getMovieDetail();
   }, []);
 
-  return { movie };
+  return { movie, loading };
 };
