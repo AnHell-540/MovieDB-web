@@ -1,7 +1,7 @@
 import { rest } from "msw";
 
 export const mockMovies = [
-  rest.get(`${process.env.REACT_APP_POPULAR_MOVIES}`, (req, res, ctx) => {
+  rest.get(`${process.env.REACT_APP_BASE_URL}popular?language=en-US&page=1`, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.delay(500),
@@ -354,7 +354,7 @@ export const mockMovies = [
       })
     );
   }),
-  rest.get(`${process.env.REACT_APP_UPCOMING_MOVIES}`, (req, res, ctx) => {
+  rest.get(`${process.env.REACT_APP_BASE_URL}upcoming?language=en-US&page=1`, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.delay(500),
@@ -712,7 +712,7 @@ export const mockMovies = [
     );
   }),
 
-  rest.get(`${process.env.REACT_APP_TOPRATED_MOVIES}`, (req, res, ctx) => {
+  rest.get(`${process.env.REACT_APP_BASE_URL}top_rated?language=en-US&page=1`, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.delay(500),
@@ -1065,7 +1065,7 @@ export const mockMovies = [
       })
     );
   }),
-  rest.get(`https://api.themoviedb.org/3/movie/:id`, (req, res, ctx) => {
+  rest.get(`${process.env.REACT_APP_BASE_URL}:id`, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.delay(500),
